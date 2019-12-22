@@ -3,85 +3,69 @@
     <div class="title">热门城市</div>
     <div class="bar">
       <ul class="barLeft">
-        <li class="active">
-          <router-link to="" class="fonta">北京</router-link>
-        </li>
-        <li>
-          <router-link  to="" class="fonta">莫干山</router-link>
-        </li>
-        <li>
-          <router-link to="" class="fonta">厦门</router-link>
-        </li>
-        <li>
-          <router-link to="" class="fonta">青岛</router-link>
-        </li>
-        <li>
-          <router-link to="" class="fonta">大理</router-link>
+        <li :class="show==i?'active':''" v-for="(item ,i) of citys" :key="i" :data-i="i" @click="Show(i)">
+          <router-link to="" class="fonta">{{item}}</router-link>
         </li>
       </ul>
       <div>
-        <span>1</span>/<span>53</span>
+        <span>{{i}}</span>/<span>{{lists[show].length}}</span>
       </div>
     </div>
-    <my-img></my-img>
-     <!-- <ul class="cantainer">
-      <li class="cantainer-item">
-        <div>
-          <img src="/img/1.jpg" alt="">
-        </div>
-        <p class="p">
-          <span class="price">¥2680</span>起
-        </p>
-        <div class="des">
-          <div>
-            <span class="span">姥姥家</span>
-          </div>
-          <div class="sty">
-            <div class="site">房山</div>
-            <div class="stylish">田园风</div>
-          </div>
-        </div>
-      </li>
-      <li class="cantainer-item">
-        <div>
-          <img src="/img/1.jpg" alt="">
-        </div>
-        <p class="p">
-          <span class="price">¥2680</span>起
-        </p>
-        <div class="des">
-          <div>
-            <span class="span">姥姥家</span>
-          </div>
-          <div class="sty">
-            <div class="site">房山</div>
-            <div class="stylish">田园风</div>
-          </div>
-        </div>
-      </li>
-      <li class="cantainer-item">
-        <div>
-          <img src="/img/1.jpg" alt="">
-        </div>
-        <p class="p">
-          <span class="price">¥2680</span>起
-        </p>
-        <div class="des">
-          <div>
-            <span class="span">姥姥家</span>
-          </div>
-          <div class="sty">
-            <div class="site">房山</div>
-            <div class="stylish">田园风</div>
-          </div>
-        </div>
-      </li>
-     </ul> -->
+    <my-img :lists="lists[show]" @change="change"></my-img>
   </div>
 </template>
 <script>
 import MyImg from "./MyImg.vue"
 export default {
+  data(){
+    return {
+      i:"1",
+      show:"0",
+      citys:["北京","莫干山","厦门","青岛","大理"],
+      lists:[
+        [
+          {src:"/img/1.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+          {src:"/img/25.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
+          {src:"/img/12.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
+          {src:"/img/20.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+        ],
+        [
+          {src:"/img/003.png",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+          {src:"/img/6.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
+          {src:"/img/10.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
+          {src:"/img/17.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+        ],
+        [
+          {src:"/img/12.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+          {src:"/img/13.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
+          {src:"/img/23.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
+          {src:"/img/21.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+        ],
+        [
+          {src:"/img/29.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+          {src:"/img/30.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
+          {src:"/img/12.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
+          {src:"/img/20.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+        ],
+        [
+          {src:"/img/18.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+          {src:"/img/19.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
+          {src:"/img/12.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
+          {src:"/img/20.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
+        ]
+      ],
+    }
+  },
+  methods:{
+    Show(e){
+      this.show=e;
+      console.log(this.show)
+    },
+    change(i){
+      this.i=i+1
+    }
+  },
+  
   components:{MyImg}
 }
 </script>
@@ -108,70 +92,16 @@ export default {
         text-decoration: none;
         color:#000;
       }
-      .active{
-        color:#82c280;
-        padding-bottom: 5px;
-        border-bottom: 2px solid #6ec565;
-        .fonta{
-          color:#82c280;
-        }
-      }
+      
     }
   }
-  // .cantainer{
-  //   display: flex;
-  //   justify-content: flex-start;
-  //   // flex-wrap: wrap;
-  //   padding: 5px;
-  //   overflow: hidden;
-    
-  //   // box-shadow:
-  //   margin: 10px auto;
-  //   .cantainer-item{
-  //     flex-grow:0; 
-  //     float: left;
-  //     width: 500px;
-  //     border-radius: 5px;
-  //     box-shadow: 0 0 5px 2px #ccc;
-  //     padding: 5px;
-  //     img{
-  //       width: 100%;
-  //     }
-  //     .p{
-  //       display: flex;
-  //       justify-content: flex-start;
-  //       margin-top: 10px;
-  //       color:#585858;
-  //       .price{
-  //         color: #e36e19;
-  //      }
-  //     }
-  //     .des{
-  //       display: flex;
-  //       justify-content: space-between;
-  //       padding-bottom: 5px;
-  //       .span{
-  //         color: #4e4e4e;
-  //         font-weight: 600;
-  //       }
-  //       .sty{
-  //         display: flex;
-  //       justify-content: space-between;
-  //       .site{
-  //         border: 1px solid #6bc34e;
-  //         color:#a7cfa0;
-  //         margin: 0 3px;
-  //         padding: 3px;
-  //       }
-  //       .stylish{
-  //         margin: 0 3px;
-  //         padding: 3px;
-  //         border: 1px solid #2ee1bd;
-  //         color:#62bea2;
-  //       }
-  //       }
-  //     }
-  //   }
-  // }
+  .active{
+    color:#82c280;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #6ec565;
+    .fonta{
+      color:#82c280 !important;
+    }
+  }
 }
 </style>

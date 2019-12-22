@@ -9,10 +9,12 @@
           <span>价格：</span>
         </div>
         <div>
-          <button class="btnleft">—
-          </button>
-          <span class="span">不限</span>
-          <button class="btnright">＋</button>
+          <a class="btnleft" @click="add(-1)" >-
+          </a>
+          <span class="span">{{price[i]}}</span>
+          <a class="btnright col" @click="add(1)" >+
+          </a>
+          
         </div>
       </div>
     </div>
@@ -43,6 +45,9 @@ import DatePicker from "./DatePicker"
 export default {
   data(){
     return {
+      mybtn:true,
+      i:0,
+      price:["不限","0~500","500~1000","1000~2000"],
       popupVisible:false,
       time:1
     }
@@ -53,8 +58,21 @@ export default {
       this.popupVisible=true;
       // console.log(this.popupVisible);
     },
-    change(time){
+    change(time){//修改住宿时间
       this.time=time
+    },
+    // 修改价格
+    add(i){
+      console.log(this.price.length)
+      // if(this.i<this.price.length-1){
+      //   this.i+;
+      // }else if(this.i>0){
+      //   this.i--;
+      // }
+      this.i+=i;
+      if(this.i<0){this.i=0};
+      if(this.i>this.price.length-1){this.i=this.price.length-1}
+      console.log(this.i)
     }
   },
   components:
@@ -75,7 +93,9 @@ export default {
   padding:5px 20px;
   box-sizing: border-box;
 }
-
+.col::focus{
+  background-color:#5222c2;
+}
 .main>div:first-child{
   display: flex;
   border-bottom: 1px solid #ededed; 
@@ -108,9 +128,10 @@ export default {
       .btnleft{
         width:25px;
         height: 25px;
+        
         margin: 4px;
         line-height: 80%;
-        
+        line-height: 25px;
         border-radius: 50%;
         background:#fff;
         border: 0;
@@ -120,7 +141,7 @@ export default {
         height: 25px;
         margin: 4px;
         line-height: 80%;
-        
+        line-height: 25px;
         border-radius: 50%;
         background:#fff;
         border: 0;

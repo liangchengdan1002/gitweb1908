@@ -2,6 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from "axios"
+import TouchCls from './touch-cls.js'
+import "./hdsj"
+ 
+// 引入路由axios模块
+// 配置基础路径
+axios.defaults.baseURL="http://localhost:5050";
+// 添加到vue原型对象中去
+Vue.prototype.axios=axios;
 
 // 引入element-ui
 import { DatePicker} from 'element-ui';
@@ -15,8 +24,7 @@ import 'mint-ui/lib/style.css'
 // 3.注册
 Vue.use(MintUI)
 
-import TouchCls from './touch-cls.js'
-import "./hdsj"
+
 
 
 

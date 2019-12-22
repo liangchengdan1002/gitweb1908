@@ -4,10 +4,6 @@
     <shousuo></shousuo>
     <city></city>
     <new-releases></new-releases>
-    <new-releases></new-releases>
-    <new-releases></new-releases>
-    <new-releases></new-releases>
-    <new-releases></new-releases>
     <gu-si></gu-si>
     
     <div class="main"></div>

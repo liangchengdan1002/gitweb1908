@@ -57,6 +57,13 @@ export default {
    GuSi,
    "logins":Logins
   },
+    // created(){
+		// 	this.axios.get("/index")
+		// 	.then(result=>{
+		// 		console.log(result.data)
+		// 	})
+		// },
+
 }
 </script>
 

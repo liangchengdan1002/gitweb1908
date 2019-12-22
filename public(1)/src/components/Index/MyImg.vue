@@ -2,7 +2,7 @@
   <div>
     <ul class="cantainer" style="width:900px; " :style="myStyle" v-swipeleft="left" v-swiperight="right">
 
-        <li class="cantainer-item" v-for="(item,i) of list" :key="i" @click="tiao">
+        <li class="cantainer-item" v-for="(item,i) of lists" :key="i" :data-i="i" @click="tiao">
           <div>
             <img :src="item.src" alt="" >
           </div>
@@ -24,19 +24,14 @@
 </template>
 <script>
 export default {
+  props:["lists"],
   data(){
     return {
-      list:[
-        {src:"/img/1.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
-        {src:"/img/25.jpg",title:"喜林苑",price:3388,site:"杭州",stylish:"轻奢"},
-        {src:"/img/12.jpg",title:"自在清境",price:4199,site:"北京",stylish:"特然"},
-        {src:"/img/20.jpg",title:"西溪湾",price:2399,site:"房山",stylish:"田园风"},
-       
-      ],
       myStyle:{
         "margin-left":"0px",
         width:"0px"
       },
+      i:"",
       myleft:0,
       innerWidth:""
     }
@@ -47,11 +42,13 @@ export default {
       this.$router.push("/detail")
     },
     left(){
-      console.log(-(parseInt(this.myStyle.width)-this.innerWidth-320))
-      console.log(this.myleft)
+      // console.log(this.myStyle.width)
       if(this.myleft>-(parseInt(this.myStyle.width)-this.innerWidth)){
-      var a=this.myleft-=320
-      this.myStyle["margin-left"]=a+"px"
+      this.myleft-=320
+      this.myStyle["margin-left"]=this.myleft+"px";
+      this.i++;
+      console.log(this.i);
+      this.$emit("change",this.i);
       }else{
       this.$toast("当前是最后一张了");
       }          
@@ -60,18 +57,29 @@ export default {
       if(this.myleft<0){
         var a=this.myleft+=320
         this.myStyle["margin-left"]=a+"px"
+        this.i--;
+        this.$emit("change",this.i)
+        console.log(this.i);
       }else{
         this.$toast("当前是第一张了");
       }
-    } 
+    },
+     
   },
   computed:{
-      myWidth(){
-      this.myStyle.width=this.list.length*320+"px"
+     myWidth(){
+      this.myStyle.width=(this.lists).length*320+"px"
+    }
+  },
+  watch:{
+    lists(){this.myWidth,
+      this.myStyle["margin-left"]="",
+      this.myleft=0
     }
   },
   created(){
     this.myWidth,
+    console.log(this.myStyle.width)
     this.innerWidth=window.innerWidth
   },
 }
